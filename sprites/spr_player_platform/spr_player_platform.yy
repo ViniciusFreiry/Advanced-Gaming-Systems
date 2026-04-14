@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Platform Collision",
-    "path":"folders/Systems/Platform Collision.yy",
+    "name":"Sprites",
+    "path":"folders/Systems/Platform Collision/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

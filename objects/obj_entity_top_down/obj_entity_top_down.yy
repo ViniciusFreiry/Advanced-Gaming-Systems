@@ -1,21 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_player_platform",
+  "%Name":"obj_entity_top_down",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_player_platform",
+  "name":"obj_entity_top_down",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Systems/Platform Collision/Objects.yy",
+    "path":"folders/Systems/Top Down Collision/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"obj_entity_platform",
-    "path":"objects/obj_entity_platform/obj_entity_platform.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -33,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_player_platform",
-    "path":"sprites/spr_player_platform/spr_player_platform.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

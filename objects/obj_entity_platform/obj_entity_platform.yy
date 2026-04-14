@@ -1,18 +1,19 @@
 {
   "$GMObject":"",
-  "%Name":"obj_ramp_platform",
-  "eventList":[],
+  "%Name":"obj_entity_platform",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":2,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"obj_ramp_platform",
+  "name":"obj_entity_platform",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
     "path":"folders/Systems/Platform Collision/Objects.yy",
   },
-  "parentObjectId":{
-    "name":"obj_ground_platform",
-    "path":"objects/obj_ground_platform/obj_ground_platform.yy",
-  },
+  "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -30,10 +31,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_ramp_platform",
-    "path":"sprites/spr_ramp_platform/spr_ramp_platform.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

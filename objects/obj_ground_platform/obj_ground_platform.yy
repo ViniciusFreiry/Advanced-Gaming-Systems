@@ -6,8 +6,8 @@
   "name":"obj_ground_platform",
   "overriddenProperties":[],
   "parent":{
-    "name":"Platform Collision",
-    "path":"folders/Systems/Platform Collision.yy",
+    "name":"Objects",
+    "path":"folders/Systems/Platform Collision/Objects.yy",
   },
   "parentObjectId":null,
   "persistent":false,

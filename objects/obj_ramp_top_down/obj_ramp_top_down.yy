@@ -1,17 +1,17 @@
 {
   "$GMObject":"",
-  "%Name":"obj_ramp_platform",
+  "%Name":"obj_ramp_top_down",
   "eventList":[],
   "managed":true,
-  "name":"obj_ramp_platform",
+  "name":"obj_ramp_top_down",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Systems/Platform Collision/Objects.yy",
+    "path":"folders/Systems/Top Down Collision/Objects.yy",
   },
   "parentObjectId":{
-    "name":"obj_ground_platform",
-    "path":"objects/obj_ground_platform/obj_ground_platform.yy",
+    "name":"obj_ground_top_down",
+    "path":"objects/obj_ground_top_down/obj_ground_top_down.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -31,8 +31,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_ramp_platform",
-    "path":"sprites/spr_ramp_platform/spr_ramp_platform.yy",
+    "name":"spr_ramp_top_down",
+    "path":"sprites/spr_ramp_top_down/spr_ramp_top_down.yy",
   },
   "spriteMaskId":null,
   "visible":true,
