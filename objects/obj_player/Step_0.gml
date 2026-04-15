@@ -1,3 +1,2 @@
 inputs();
-
-event_inherited();
+state();

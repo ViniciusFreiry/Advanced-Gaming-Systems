@@ -24,8 +24,18 @@ move = function() {
 	if(_abs_hspd >= 1) {
 		repeat(_abs_hspd) {
 			if(place_meeting(x + _hspd, y, obj_ground)) {
-				if(place_meeting(ceil(x), y, obj_ground)) x = floor(x);
-				else x = ceil(x);
+				if(!place_meeting(x + _hspd, y - 1, obj_ground)) y--;
+				else if(!place_meeting(x + _hspd, y + 1, obj_ground)) y++;
+			}
+			
+			if(place_meeting(x + _hspd, y, obj_ground)) {
+				if(hspd >= 0) {
+					if(place_meeting(ceil(x), y, obj_ground)) x = floor(x);
+					else x = ceil(x);
+				} else {
+					if(place_meeting(floor(x), y, obj_ground)) x = ceil(x);
+					else x = floor(x);
+				}
 			
 				hspd = 0;
 				break;
@@ -36,20 +46,37 @@ move = function() {
 	} else {
 		x += hspd;
 		
-		if(place_meeting(ceil(x), y, obj_ground)) {
-			x = floor(x);
-			hspd = 0;
-		} else if(place_meeting(floor(x), y, obj_ground)) {
-			x = ceil(x);
-			hspd = 0;
+		var _ceil = ceil(x),
+		_floor = floor(x);
+		
+		if(hspd >= 0) {
+			if(place_meeting(_ceil, y, obj_ground)) {
+				x = _floor;
+				hspd = 0;
+			}
+		} else {
+			if(place_meeting(_floor, y, obj_ground)) {
+				x = _ceil;
+				hspd = 0;
+			}
 		}
 	}
 	
 	if(_abs_vspd >= 1) {
 		repeat(_abs_vspd) {
 			if(place_meeting(x, y + _vspd, obj_ground)) {
-				if(place_meeting(x, ceil(y), obj_ground)) y = floor(y);
-				else y = ceil(y);
+				if(!place_meeting(x - 1, y + _vspd, obj_ground)) x--;
+				else if(!place_meeting(x + 1, y + _vspd, obj_ground)) x++;
+			}
+			
+			if(place_meeting(x, y + _vspd, obj_ground)) {
+				if(vspd >= 0) {
+					if(place_meeting(x, ceil(y), obj_ground)) y = floor(y);
+					else y = ceil(y);
+				} else {
+					if(place_meeting(x, floor(y), obj_ground)) y = ceil(y);
+					else y = floor(y);
+				}
 		
 				vspd = 0;
 				break;
@@ -60,12 +87,19 @@ move = function() {
 	} else {
 		y += vspd;
 		
-		if(place_meeting(x, ceil(y), obj_ground)) {
-			y = floor(y);
-			vspd = 0;
-		} else if(place_meeting(x, floor(y), obj_ground)) {
-			y = ceil(y);
-			vspd = 0;
+		var _ceil = ceil(y),
+		_floor = floor(y);
+		
+		if(vspd >= 0) {
+			if(place_meeting(x, _ceil, obj_ground)) {
+				y = _floor;
+				vspd = 0;
+			}
+		} else {
+			if(place_meeting(x, _floor, obj_ground)) {
+				y = _ceil;
+				vspd = 0;
+			}
 		}
 	}
 }

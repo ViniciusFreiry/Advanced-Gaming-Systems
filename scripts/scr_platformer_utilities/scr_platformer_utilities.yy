@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_platformer_utilities",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_platformer_utilities",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Utilities/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

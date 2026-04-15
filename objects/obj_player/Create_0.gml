@@ -1,5 +1,6 @@
 event_inherited();
 
+#region Variables
 up = false;
 left = false;
 down = false;
@@ -9,6 +10,10 @@ spd = 5;
 my_acel = 0.1;
 acel = 0.1;
 
+initialize_states_with_animation();
+#endregion
+
+#region Functions
 inputs = function() {
 	up = keyboard_check(ord("W"));
 	left = keyboard_check(ord("A"));
@@ -35,3 +40,26 @@ apply_spd = function() {
 		vspd = lerp(vspd, 0, acel);
 	}
 }
+#endregion
+
+#region State Functions
+idle_state = function() {
+	change_sprite_with_animation();
+	
+	start_moving = false;
+	apply_spd();
+	
+	if((left xor right) or (up xor down)) change_state(moving_state, [spr_player_moving]);
+}
+
+moving_state = function() {
+	change_sprite_with_animation();
+	
+	start_moving = true;
+	apply_spd();
+	
+	if(!(left xor right) and !(up xor down)) change_state(idle_state, [spr_player_idle]);
+}
+
+state = idle_state;
+#endregion
