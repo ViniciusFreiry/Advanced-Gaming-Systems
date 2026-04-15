@@ -38,7 +38,7 @@
   "name":"rm_platform",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Systems/Platform Collision/Rooms.yy",
+    "path":"folders/Utilities/Systems/Platform Collision/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

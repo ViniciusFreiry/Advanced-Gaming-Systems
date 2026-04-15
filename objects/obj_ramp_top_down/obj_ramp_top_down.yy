@@ -7,7 +7,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
-    "path":"folders/Systems/Top Down Collision/Objects.yy",
+    "path":"folders/Utilities/Systems/Top Down Collision/Objects.yy",
   },
   "parentObjectId":{
     "name":"obj_ground_top_down",

@@ -40,7 +40,7 @@
   "name":"rm_top_down",
   "parent":{
     "name":"Rooms",
-    "path":"folders/Systems/Top Down Collision/Rooms.yy",
+    "path":"folders/Utilities/Systems/Top Down Collision/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

@@ -26,7 +26,7 @@
   "origin":0,
   "parent":{
     "name":"Sprites",
-    "path":"folders/Systems/Top Down Collision/Sprites.yy",
+    "path":"folders/Utilities/Systems/Top Down Collision/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",
