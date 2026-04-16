@@ -10,8 +10,8 @@
   "name":"obj_entity_top_down",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Utilities/Systems/Top Down Collision/Objects.yy",
+    "name":"Normal Collision",
+    "path":"folders/Utilities/Systems/Top Down Collision/Objects/Normal Collision.yy",
   },
   "parentObjectId":null,
   "persistent":false,

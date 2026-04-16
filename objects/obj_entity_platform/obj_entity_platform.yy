@@ -10,8 +10,8 @@
   "name":"obj_entity_platform",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Utilities/Systems/Platform Collision/Objects.yy",
+    "name":"Normal Collision",
+    "path":"folders/Utilities/Systems/Platform Collision/Objects/Normal Collision.yy",
   },
   "parentObjectId":null,
   "persistent":false,
