@@ -1,12 +1,26 @@
 event_inherited();
 
+smooth_camera_set_target();
+
 #region Variables
 up = false;
 left = false;
 down = false;
 right = false;
-spd = 5;
+attack = false;
+shield = false;
+dodge = false;
 
+keyboard_set_map(ord("W"), vk_up);
+keyboard_set_map(ord("A"), vk_left);
+keyboard_set_map(ord("S"), vk_down);
+keyboard_set_map(ord("D"), vk_right);
+keyboard_set_map(ord("M"), ord("C"));
+keyboard_set_map(ord("L"), ord("Z"));
+keyboard_set_map(ord("K"), ord("X"));
+
+spd = 3;
+dodge_spd = 5;
 my_acel = 0.1;
 acel = 0.1;
 
@@ -14,21 +28,30 @@ face = 0;
 
 sprites_idle = [[spr_player_idle_down, spr_player_idle_up, spr_player_idle_right, spr_player_idle_right]];
 sprites_run = [[spr_player_run_down, spr_player_run_up, spr_player_run_right, spr_player_run_right]];
+sprites_attack = [[spr_player_attack_down, spr_player_attack_up, spr_player_attack_right, spr_player_attack_right]];
+sprites_shield = [[spr_player_shield_down, spr_player_shield_up, spr_player_shield_right, spr_player_shield_right]];
+sprites_dodge = [[spr_player_dodge_down, spr_player_dodge_up, spr_player_dodge_right, spr_player_dodge_right]];
 
 initialize_states_with_animation();
 #endregion
 
 #region Functions
 inputs = function() {
-	up = keyboard_check(ord("W"));
-	left = keyboard_check(ord("A"));
-	down = keyboard_check(ord("S"));
-	right = keyboard_check(ord("D"));
+	up = keyboard_check(vk_up);
+	left = keyboard_check(vk_left);
+	down = keyboard_check(vk_down);
+	right = keyboard_check(vk_right);
+	attack = keyboard_check_pressed(ord("C"));
+	shield = keyboard_check(ord("Z"));
+	dodge = keyboard_check_pressed(ord("X"));
 	
 	if((left xor right) or (up xor down)) {
-		start_moving = true;
-		dir = point_direction(0, 0, right - left, down - up);
-	} else start_moving = false;
+		switch(state) {
+			case dodge_state: break;
+			
+			default: dir = point_direction(0, 0, right - left, down - up);
+		}
+	}
 }
 
 apply_spd = function() {
@@ -46,6 +69,14 @@ apply_spd = function() {
 	}
 }
 
+change_face = function() {
+	if(down and !up) face = 0;
+	else if(up and !down) face =	1;
+	
+	if(right and !left) face = 2;
+	else if(left and !right) face = 3;
+}
+
 change_self_sprite = function(_array = sprites_idle) {
 	sprite_index = _array[sprites_list_index][face];
 	sprites_list[sprites_list_index] = sprite_index;
@@ -59,25 +90,28 @@ change_self_sprite = function(_array = sprites_idle) {
 
 #region State Functions
 idle_state = function() {
-	change_sprite_with_animation();
+	if(change_sprite_with_animation()) {
+		hspd = 0;
+		vspd = 0;
+	}
 	
 	change_self_sprite(sprites_idle);
 	
-	hspd = 0;
-	vspd = 0;
+	start_moving = true;
 	
 	if((left xor right) or (up xor down)) change_state(moving_state, [spr_player_run_down]);
+	
+	if(attack) change_state(attack_state, [spr_player_attack_down]);
+	
+	if(shield) change_state(shield_state, [spr_player_shield_down]);
+	
+	if(dodge) change_state(dodge_state, [spr_player_dodge_down]);
 }
 
 moving_state = function() {
 	change_sprite_with_animation();
 	
-	if(down and !up) face = 0;
-	else if(up and !down) face =	1;
-	
-	if(right and !left) face = 2;
-	else if(left and !right) face = 3;
-	
+	change_face();
 	change_self_sprite(sprites_run);
 	
 	start_moving = true;
@@ -88,6 +122,46 @@ moving_state = function() {
 	}
 	
 	apply_spd();
+	
+	if(attack) change_state(attack_state, [spr_player_attack_down]);
+	
+	if(shield) change_state(shield_state, [spr_player_shield_down]);
+	
+	if(dodge) change_state(dodge_state, [spr_player_dodge_down]);
+}
+
+attack_state = function() {
+	if(change_sprite_with_animation()) {
+		hspd = 0;
+		vspd = 0;
+	}
+	
+	change_self_sprite(sprites_attack);
+	
+	if(animation_end()) change_state(idle_state, [spr_player_idle_down]);
+}
+
+shield_state = function() {
+	if(change_sprite_with_animation()) {
+		hspd = 0;
+		vspd = 0;
+	}
+	
+	change_face();
+	change_self_sprite(sprites_shield);
+	
+	if(!shield) change_state(idle_state, [spr_player_idle_down]);
+}
+
+dodge_state = function() {
+	change_sprite_with_animation();
+	
+	hspd = lengthdir_x(dodge_spd, dir);
+	vspd = lengthdir_y(dodge_spd, dir);
+	
+	change_self_sprite(sprites_dodge);
+	
+	if(animation_end()) change_state(idle_state, [spr_player_idle_down]);
 }
 
 state = idle_state;

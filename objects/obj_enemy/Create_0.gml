@@ -66,11 +66,11 @@ moving_state = function() {
 	
 	if(check_player_distance()) {
 		reset_timer_index(Enemy_Timer.Move);
-		change_state(chaase_player_state, [spr_enemy_moving]);
+		change_state(chase_player_state, [spr_enemy_moving]);
 	}
 }
 
-chaase_player_state = function() {
+chase_player_state = function() {
 	change_sprite_with_animation()
 	
 	apply_spd();
