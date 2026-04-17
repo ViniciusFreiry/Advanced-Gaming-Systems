@@ -184,6 +184,8 @@
     {"id":{"name":"spr_ramp_top_down","path":"sprites/spr_ramp_top_down/spr_ramp_top_down.yy",},},
     {"id":{"name":"spr_ramp","path":"sprites/spr_ramp/spr_ramp.yy",},},
     {"id":{"name":"spr_rect","path":"sprites/spr_rect/spr_rect.yy",},},
+    {"id":{"name":"spr_tilesets","path":"sprites/spr_tilesets/spr_tilesets.yy",},},
+    {"id":{"name":"tl_tiles","path":"tilesets/tl_tiles/tl_tiles.yy",},},
   ],
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
