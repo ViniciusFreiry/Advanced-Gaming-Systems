@@ -1,1 +1,3 @@
 randomise();
+
+global.pause = false;

@@ -1,3 +1,9 @@
+dialog = {
+	text: ["undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined", "undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined undefined"],
+	portrait: [spr_portrait_mage, spr_portrait_player],
+	text_spd: 0.3
+}
+
 speak_box_width = 22;
 speak_box_height = 28;
 
@@ -13,6 +19,7 @@ dialog_area = function() {
 					change_state(go_to_event_state, [spr_player_run_up]);
 					go_to_x = other.x;
 					go_to_y = other.y + 16;
+					npc = other.id;
 				}
 			}
 		}

@@ -26,6 +26,7 @@ acel = 0.1;
 
 go_to_x = 0;
 go_to_y = 0;
+npc = noone;
 
 face = 0;
 
@@ -170,6 +171,13 @@ dodge_state = function() {
 event_state = function() {
 	change_sprite_with_animation();
 	change_self_sprite(sprites_idle);
+	
+	if(!instance_exists(obj_dialog)) {
+		var _obj_dialog = instance_create_depth(0, 0, 0, obj_dialog);
+		
+		_obj_dialog.player = id;
+		with(npc) _obj_dialog.dialog = dialog;
+	}
 }
 
 go_to_event_state = function() {

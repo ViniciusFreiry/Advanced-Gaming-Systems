@@ -33,7 +33,7 @@ function draw_rich_text(_x, _y, _text, _sep, _w, _xscale = 1, _yscale = 1, _visi
         
 	        case "W":
 	        case "M":
-	            _width -= 0.5 / _scale;
+	            _width -= 1 / _scale;
 	        break;
         
 	        case " ":
