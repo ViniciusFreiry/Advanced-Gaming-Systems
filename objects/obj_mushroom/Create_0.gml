@@ -78,8 +78,6 @@ moving_state = function() {
 	apply_spd();
 		
 	if(point_distance(x, y, target_x, target_y) <= spd or place_meeting(x + hspd, y + vspd, obj_ground)) {
-		x = target_x;
-		y = target_y;
 		hspd = 0;
 		vspd = 0;
 		reset_timer_index(Enemy_Timer.Move);

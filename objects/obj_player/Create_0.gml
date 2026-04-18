@@ -24,6 +24,9 @@ dodge_spd = 5;
 my_acel = 0.1;
 acel = 0.1;
 
+go_to_x = 0;
+go_to_y = 0;
+
 face = 0;
 
 sprites_idle = [[spr_player_idle_down, spr_player_idle_up, spr_player_idle_right, spr_player_idle_right]];
@@ -162,6 +165,53 @@ dodge_state = function() {
 	change_self_sprite(sprites_dodge);
 	
 	if(animation_end()) change_state(idle_state, [spr_player_idle_down]);
+}
+
+event_state = function() {
+	change_sprite_with_animation();
+	change_self_sprite(sprites_idle);
+}
+
+go_to_event_state = function() {
+	change_sprite_with_animation();
+	
+	dir = point_direction(x, y, go_to_x, go_to_y);
+	
+	hspd = lengthdir_x(spd / 2, dir);
+	vspd = lengthdir_y(spd / 2, dir);
+	
+	var _face = dir div 45;
+	
+	switch(_face) {
+		case 0:
+		case 7:
+			face = 2;
+			image_xscale = 1;
+		break;
+		
+		case 1: case 2: face = 1; break;
+		
+		case 3:
+		case 4:
+			face = 3;
+			image_xscale = -1;
+		break;
+		
+		case 5: case 6: face = 0; break;
+	}
+	
+	change_self_sprite(sprites_run);
+	
+	if(point_distance(x, y, go_to_x, go_to_y) <= spd / 2) {
+		hspd = 0;
+		vspd = 0;
+		x = go_to_x;
+		y = go_to_y;
+		x_buffer = x;
+		y_buffer = y;
+		
+		change_state(event_state, [spr_player_idle_down]);
+	}
 }
 
 state = idle_state;

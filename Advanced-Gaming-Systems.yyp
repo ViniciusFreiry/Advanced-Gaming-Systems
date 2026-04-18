@@ -125,6 +125,7 @@
     {"id":{"name":"obj_ramp_top_down","path":"objects/obj_ramp_top_down/obj_ramp_top_down.yy",},},
     {"id":{"name":"obj_ramp","path":"objects/obj_ramp/obj_ramp.yy",},},
     {"id":{"name":"obj_screen_shake_manager","path":"objects/obj_screen_shake_manager/obj_screen_shake_manager.yy",},},
+    {"id":{"name":"obj_shadows","path":"objects/obj_shadows/obj_shadows.yy",},},
     {"id":{"name":"obj_smooth_camera","path":"objects/obj_smooth_camera/obj_smooth_camera.yy",},},
     {"id":{"name":"obj_square_aux","path":"objects/obj_square_aux/obj_square_aux.yy",},},
     {"id":{"name":"obj_square_transition","path":"objects/obj_square_transition/obj_square_transition.yy",},},
