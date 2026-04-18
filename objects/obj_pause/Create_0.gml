@@ -1,3 +1,7 @@
+global.inventory[# 2, 2] = global.weapons[| Weapons.Wooden_Sword];
+global.inventory[# 0, 1] = global.weapons[| Weapons.Iron_Sword];
+global.inventory[# 0, 0] = global.weapons[| Weapons.Blood_Sword];
+
 display_set_gui_size(camera_get_view_width(view_camera[0]), camera_get_view_height(view_camera[0]));
 
 draw_pause = function() {
@@ -49,8 +53,6 @@ draw_inventory = function() {
 	
 	draw_sprite_stretched(spr_inventory_background, 0, _inv_x, _inv_y, _inv_width, _inv_height);
 	
-	draw_rectangle(_item_x, _item_y, _item_x + _item_width, _item_y + _item_height, true);
-	
 	draw_rectangle(_desc_x, _desc_y, _desc_x + _desc_width, _desc_y + _desc_height, true);
 	
 	
@@ -60,8 +62,8 @@ draw_inventory = function() {
 	for(var _i = 0; _i < _row; _i++) {
 		for(var _j = 0; _j < _column; _j++) {
 			if(_mouse_in_inventory) {
-				_selected_x = (_mouse_x - _item_x - (_item_slot_marg_x * (_j + 1))) div _item_slot_width;
-				_selected_y = (_mouse_y - _item_y - (_item_slot_marg_y * (_i + 1))) div _item_slot_height;
+				_selected_x = (_mouse_x - _item_x - (_item_slot_marg_x * _j)) div _item_slot_width;
+				_selected_y = (_mouse_y - _item_y - (_item_slot_marg_y * _i)) div _item_slot_height;
 			}
 			
 			_selected_x = clamp(_selected_x, 0, _column - 1);
@@ -69,9 +71,38 @@ draw_inventory = function() {
 			
 			var _x1 = _item_x + _item_slot_width * _j + _item_slot_marg_x * (_j + 1),
 			_y1 = _item_y + _item_slot_height * _i + _item_slot_marg_y * (_i + 1),
-			_selected = (_selected_x == _j and _selected_y == _i ? 1 : 0);
+			_selected = (_selected_x == _j and _selected_y == _i ? 1 : 0),
+			_item_atual = global.inventory[# _j, _i];
 			
 			draw_sprite_stretched(spr_inventory_box, _selected, _x1, _y1, _item_slot_width, _item_slot_height);
+		
+			if(_item_atual) {
+				var _item_atual_width = _item_slot_width * 0.5,
+				_item_atual_height = _item_slot_height * 0.5,
+				_item_atual_x = _x1 + _item_atual_width / 2,
+				_item_atual_y = _y1 + _item_atual_height / 2;
+				
+				draw_sprite_stretched(_item_atual.spr, _item_atual.my_id, _item_atual_x, _item_atual_y, _item_atual_width, _item_atual_height);
+			}
+		}
+		
+		var _selected_atual = global.inventory[# _selected_x, _selected_y];
+		
+		if(_selected_atual) {
+			var _selected_atual_spr_width = sprite_get_width(_selected_atual.spr),
+			_selected_atual_width = _item_slot_width * 0.5,
+			_selected_atual_height = _item_slot_height * 0.5,
+			_selected_atual_x = _desc_x + _desc_width / 2,
+			_selected_atual_y = _desc_y + _selected_atual_height / 2,
+			_selected_atual_scale = _selected_atual_width / _selected_atual_spr_width;
+			_effect_x = generate_sin_wave(2);
+			
+			draw_sprite_ext(_selected_atual.spr, _selected_atual.my_id, _selected_atual_x, _selected_atual_y, _selected_atual_scale * _effect_x, _selected_atual_scale, 0, c_white, 1);
+			
+			draw_set_font(fnt_inventory);
+			draw_set_halign(fa_center);
+			draw_text_ext_transformed(_selected_atual_x, _selected_atual_y + _selected_atual_height, _selected_atual.desc, string_height("A") * 0.5, _desc_width / 0.1, 0.1, 0.1, 0);
+			draw_set_halign(-1);
 		}
 	}
 }

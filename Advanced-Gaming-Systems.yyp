@@ -33,6 +33,7 @@
     {"$GMFolder":"","%Name":"Idle","folderPath":"folders/Sprites/Player/Idle.yy","name":"Idle","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Run","folderPath":"folders/Sprites/Player/Run.yy","name":"Run","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Shield","folderPath":"folders/Sprites/Player/Shield.yy","name":"Shield","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Weapon","folderPath":"folders/Sprites/Weapon.yy","name":"Weapon","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tile Sets","folderPath":"folders/Tile Sets.yy","name":"Tile Sets","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Timelines","folderPath":"folders/Timelines.yy","name":"Timelines","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Utilities","folderPath":"folders/Utilities.yy","name":"Utilities","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -102,6 +103,7 @@
   "name":"Advanced-Gaming-Systems",
   "resources":[
     {"id":{"name":"fnt_dialog","path":"fonts/fnt_dialog/fnt_dialog.yy",},},
+    {"id":{"name":"fnt_inventory","path":"fonts/fnt_inventory/fnt_inventory.yy",},},
     {"id":{"name":"obj_damage_flash","path":"objects/obj_damage_flash/obj_damage_flash.yy",},},
     {"id":{"name":"obj_dialog","path":"objects/obj_dialog/obj_dialog.yy",},},
     {"id":{"name":"obj_entity_platform_ramp","path":"objects/obj_entity_platform_ramp/obj_entity_platform_ramp.yy",},},
@@ -201,6 +203,7 @@
     {"id":{"name":"spr_ramp","path":"sprites/spr_ramp/spr_ramp.yy",},},
     {"id":{"name":"spr_rect","path":"sprites/spr_rect/spr_rect.yy",},},
     {"id":{"name":"spr_shadow","path":"sprites/spr_shadow/spr_shadow.yy",},},
+    {"id":{"name":"spr_sword","path":"sprites/spr_sword/spr_sword.yy",},},
     {"id":{"name":"spr_text_box","path":"sprites/spr_text_box/spr_text_box.yy",},},
     {"id":{"name":"spr_tilesets","path":"sprites/spr_tilesets/spr_tilesets.yy",},},
     {"id":{"name":"Sprite41","path":"sprites/Sprite41/Sprite41.yy",},},
