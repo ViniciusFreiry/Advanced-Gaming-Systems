@@ -1,0 +1,2 @@
+state();
+sprite_controll();
