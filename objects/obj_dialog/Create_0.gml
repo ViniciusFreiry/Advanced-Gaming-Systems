@@ -39,7 +39,7 @@ draw_dialog = function(_dialog = dialog) {
 	
 	draw_sprite_ext(_dialog.portrait[page], 0, _marg, _portrait_y, _portrait_scale, _portrait_scale, 0, c_white, 1);
 
-	draw_text_ext(_x, _y + _marg, _text, _marg, _gui_width - _x + _marg);
+	draw_text_ext_transformed(_x, _y + _marg, _text, _marg, (_gui_width - _marg - _x) * 2, 0.5, 0.5, 0);
 	
 	if(keyboard_check_pressed(vk_enter)) {
 		if(index < _text_length) index = _text_length;
