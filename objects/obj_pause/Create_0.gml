@@ -23,7 +23,8 @@ draw_pause = function() {
 
 draw_inventory = function() {
 	static _selected_x = 0,
-	_selected_y = 0;
+	_selected_y = 0,
+	_item_mouse = 0;
 	
 	var _gui_width = display_get_gui_width(),
 	_gui_height = display_get_gui_height(),
@@ -49,13 +50,19 @@ draw_inventory = function() {
 	_item_slot_marg_x = _item_width * 0.02,
 	_item_slot_marg_y = _item_height * 0.02,
 	_item_slot_width = (_item_width - _item_slot_marg_x * (_column + 1)) div _column,
-	_item_slot_height = (_item_height - _item_slot_marg_y * (_row + 1)) div _row;
+	_item_slot_height = (_item_height - _item_slot_marg_y * (_row + 1)) div _row,
+	_equip_x = _inv_x + (_inv_width - _item_slot_width) / 2,
+	_equip_y = _inv_y - _item_slot_height;
 	
 	draw_sprite_stretched(spr_inventory_background, 0, _inv_x, _inv_y, _inv_width, _inv_height);
 	
-	draw_rectangle(_desc_x, _desc_y, _desc_x + _desc_width, _desc_y + _desc_height, true);
+	draw_sprite_stretched(spr_inventory_box, 0, _equip_x, _equip_y, _item_slot_width, _item_slot_height);
+	if(global.player_weapon) {
+		var _equip_width = _item_slot_width * 0.5,
+		_equip_height = _item_slot_height * 0.5;
 	
-	
+		draw_sprite_stretched(global.player_weapon.spr, global.player_weapon.my_id, _equip_x + _equip_width / 2, _equip_y + _equip_height / 2, _equip_width, _equip_height);
+	}
 	
 	_mouse_in_inventory = (_mouse_x == clamp(_mouse_x, _item_x, _item_x + _item_width) and _mouse_y == clamp(_mouse_y, _item_y, _item_y + _item_height));
 	
@@ -85,24 +92,46 @@ draw_inventory = function() {
 				draw_sprite_stretched(_item_atual.spr, _item_atual.my_id, _item_atual_x, _item_atual_y, _item_atual_width, _item_atual_height);
 			}
 		}
-		
-		var _selected_atual = global.inventory[# _selected_x, _selected_y];
-		
-		if(_selected_atual) {
-			var _selected_atual_spr_width = sprite_get_width(_selected_atual.spr),
-			_selected_atual_width = _item_slot_width * 0.5,
-			_selected_atual_height = _item_slot_height * 0.5,
-			_selected_atual_x = _desc_x + _desc_width / 2,
-			_selected_atual_y = _desc_y + _selected_atual_height / 2,
-			_selected_atual_scale = _selected_atual_width / _selected_atual_spr_width;
-			_effect_x = generate_sin_wave(2);
-			
-			draw_sprite_ext(_selected_atual.spr, _selected_atual.my_id, _selected_atual_x, _selected_atual_y, _selected_atual_scale * _effect_x, _selected_atual_scale, 0, c_white, 1);
-			
-			draw_set_font(fnt_inventory);
-			draw_set_halign(fa_center);
-			draw_text_ext_transformed(_selected_atual_x, _selected_atual_y + _selected_atual_height, _selected_atual.desc, string_height("A") * 0.5, _desc_width / 0.1, 0.1, 0.1, 0);
-			draw_set_halign(-1);
+	}
+	
+	if(_mouse_in_inventory) {
+		if(mouse_check_button_released(mb_right)) {
+			if(global.inventory[# _selected_x, _selected_y]) global.inventory[# _selected_x, _selected_y].use_item();
+		}
+				
+		if(mouse_check_button_released(mb_left)) {
+			_item_mouse = swap_item(_selected_x, _selected_y, _item_mouse);
 		}
 	}
+	
+	var _selected_atual = global.inventory[# _selected_x, _selected_y];
+		
+	if(_selected_atual) {
+		var _selected_atual_spr_width = sprite_get_width(_selected_atual.spr),
+		_selected_atual_width = _item_slot_width * 0.5,
+		_selected_atual_height = _item_slot_height * 0.5,
+		_selected_atual_x = _desc_x + _desc_width / 2,
+		_selected_atual_y = _desc_y + _selected_atual_height / 2,
+		_selected_atual_scale = _selected_atual_width / _selected_atual_spr_width;
+		_effect_x = generate_sin_wave(2);
+			
+		draw_sprite_ext(_selected_atual.spr, _selected_atual.my_id, _selected_atual_x, _selected_atual_y, _selected_atual_scale * _effect_x, _selected_atual_scale, 0, c_white, 1);
+			
+		draw_set_font(fnt_inventory);
+		draw_set_halign(fa_center);
+		draw_text_ext_transformed(_selected_atual_x, _selected_atual_y + _selected_atual_height, _selected_atual.desc, string_height("A") * 0.5, _desc_width / 0.1, 0.1, 0.1, 0);
+		draw_set_halign(-1);
+	}
+	
+	if(_item_mouse) {
+		draw_sprite_stretched(_item_mouse.spr, _item_mouse.my_id, _mouse_x, _mouse_y, _item_slot_width * 0.5, _item_slot_height * 0.5);
+	}
+}
+
+swap_item = function(_x, _y, _item) {
+	var _item_storage = global.inventory[# _x, _y];
+	
+	global.inventory[# _x, _y] = _item;
+	
+	return _item_storage;
 }
