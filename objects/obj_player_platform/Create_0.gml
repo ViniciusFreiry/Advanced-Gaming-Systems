@@ -1,6 +1,8 @@
 event_inherited();
 
 jump = false;
+jumps = 2;
+jumps_qtd = 2;
 
 inputs = function() {
 	up = keyboard_check(ord("W"));

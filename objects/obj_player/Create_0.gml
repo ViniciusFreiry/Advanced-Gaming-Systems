@@ -45,7 +45,7 @@ inputs = function() {
 	left = keyboard_check(vk_left);
 	down = keyboard_check(vk_down);
 	right = keyboard_check(vk_right);
-	attack = keyboard_check_pressed(ord("C"));
+	attack = keyboard_check_pressed(ord("C")) and global.player_weapon;
 	shield = keyboard_check(ord("Z"));
 	dodge = keyboard_check_pressed(ord("X"));
 	
@@ -135,14 +135,33 @@ moving_state = function() {
 }
 
 attack_state = function() {
+	static my_damage = noone;
+	
 	if(change_sprite_with_animation()) {
 		hspd = 0;
 		vspd = 0;
+		
+		var _face = 0;
+		
+		switch(face) {
+			case 0: _face = 3; break;
+			case 1: _face = 1; break;
+			case 2: _face = 0; break;
+			case 3: _face = 2; break;
+		}
+		
+		var _damage_x = x + lengthdir_x(bbox_right - bbox_left, _face * 90),
+		_damage_y = y + lengthdir_y(bbox_bottom - bbox_top, _face * 90);
+		
+		my_damage = instance_create_depth(_damage_x, _damage_y - bbox_bottom + bbox_top, 0, obj_damage);
 	}
 	
 	change_self_sprite(sprites_attack);
 	
-	if(animation_end()) change_state(idle_state, [spr_player_idle_down]);
+	if(animation_end()) {
+		instance_destroy(my_damage);
+		change_state(idle_state, [spr_player_idle_down]);
+	}
 }
 
 shield_state = function() {

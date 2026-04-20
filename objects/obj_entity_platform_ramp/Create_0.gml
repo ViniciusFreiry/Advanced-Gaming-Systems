@@ -5,7 +5,6 @@ hspd = 0;
 vspd = 0;
 max_hspd = 5;
 max_vspd = 10;
-jumps_qtd = 2;
 ground = false;
 
 up = false;
@@ -49,7 +48,7 @@ move = function() {
 			if(!place_meeting(x + _hspd, y + 1, obj_ground_platform) and 
 			place_meeting(x + _hspd, y + 2, obj_ground_platform)) {
 				y++;
-				continue;
+				y_buffer++;
 			}
 			
 			x += _hspd;

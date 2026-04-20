@@ -1,0 +1,1 @@
+use_shader_draw(draw_self);

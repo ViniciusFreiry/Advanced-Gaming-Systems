@@ -35,7 +35,7 @@ function initialize_states_with_animation(_sprite = sprite_index) {
 }
 
 function change_sprite_with_animation() {
-	if(animation_end() and array_length(sprites_list) - 1 > sprites_list_index) sprites_list_index++;
+	if(sprite_index == sprites_list[sprites_list_index] and animation_end() and array_length(sprites_list) - 1 > sprites_list_index) sprites_list_index++;
 	
 	return change_sprite(sprites_list[sprites_list_index]);
 }

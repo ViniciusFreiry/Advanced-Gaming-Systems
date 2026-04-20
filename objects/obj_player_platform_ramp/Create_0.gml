@@ -1,6 +1,8 @@
 event_inherited();
 
 jump = false;
+jumps = 2;
+jumps_qtd = 2;
 
 inputs = function() {
 	up = keyboard_check(ord("W"));
@@ -15,7 +17,7 @@ apply_spd = function() {
 	
 	hspd = (right - left) * max_hspd;
 	
-	if(ground) jumps_qtd = 2;
+	if(ground) jumps_qtd = jumps;
 	else {
 		vspd = clamp(vspd + grav, -max_vspd, max_vspd);
 	}

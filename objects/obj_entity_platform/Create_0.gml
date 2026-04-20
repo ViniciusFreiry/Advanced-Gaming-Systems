@@ -5,7 +5,6 @@ hspd = 0;
 vspd = 0;
 max_hspd = 5;
 max_vspd = 10;
-jumps_qtd = 2;
 ground = false;
 
 up = false;

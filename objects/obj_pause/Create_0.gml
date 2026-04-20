@@ -102,6 +102,16 @@ draw_inventory = function() {
 		if(mouse_check_button_released(mb_left)) {
 			_item_mouse = swap_item(_selected_x, _selected_y, _item_mouse);
 		}
+	} else {
+		if(_item_mouse and mouse_check_button_released(mb_left)) {
+			if(count_itens(global.player_weapon) > 0) {
+				var _new_item = instance_create_layer(mouse_x, mouse_y, "Player", obj_item);
+			
+				_new_item.item = _item_mouse;
+			
+				_item_mouse = 0;
+			}
+		}
 	}
 	
 	var _selected_atual = global.inventory[# _selected_x, _selected_y];
@@ -134,4 +144,18 @@ swap_item = function(_x, _y, _item) {
 	global.inventory[# _x, _y] = _item;
 	
 	return _item_storage;
+}
+
+count_itens = function(_item) {
+	var _column = ds_grid_width(global.inventory),
+	_row = ds_grid_height(global.inventory),
+	_qtd = 0;
+	
+	for(var _i = 0; _i < _row; _i++) {
+		for(var _j = 0; _j < _column; _j++) {
+			if(global.inventory[# _j, _i] == _item) _qtd++;
+		}
+	}
+	
+	return _qtd;
 }

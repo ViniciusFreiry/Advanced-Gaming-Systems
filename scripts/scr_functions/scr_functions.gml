@@ -11,6 +11,25 @@ function create_weapon(_name, _desc, _spr, _damage, _spd) constructor {
 	use_item = function() {
 		global.player_weapon = global.weapons[| my_id];
 	}
+	
+	take_item = function() {
+		var _column = ds_grid_width(global.inventory),
+		_row = ds_grid_height(global.inventory);
+		
+		for(var _i = 0; _i < _row; _i++) {
+			for(var _j = 0; _j < _column; _j++) {
+				var _actual = global.inventory[# _j, _i];
+				
+				if(!_actual) {
+					global.inventory[# _j, _i] = global.weapons[| my_id];
+					
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
 }
 
 enum Weapons {

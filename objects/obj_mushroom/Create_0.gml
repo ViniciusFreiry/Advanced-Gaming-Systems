@@ -1,22 +1,5 @@
 event_inherited();
 
-spd = 3;
-
-target_distance = 100;
-target_x = 0;
-target_y = 0;
-
-initialize_states_with_animation();
-initialize_timer_system(4);
-set_timers_cd([[FPS, FPS * 2], [FPS * 2, round(FPS) * 3], [FPS * 2, FPS * 2], [FPS / 2, FPS / 2]]);
-
-enum Enemy_Timer {
-	Idle,
-	Move,
-	Attack_Cd,
-	Attack_Charge
-}
-
 sprite_controll = function() {
 	var _face = dir div 45;
 	
@@ -142,6 +125,13 @@ attack_player = function() {
 	if(point_distance(x, y, target_x, target_y) < spd * 3 or place_meeting(x + hspd, y + vspd, obj_ground)) {
 		change_state(idle_state, [spr_mushroom_jump_down]);
 	}
+}
+
+stop_state = function() {
+	change_sprite_with_animation();
+	
+	hspd = 0;
+	vspd = 0;
 }
 
 state = idle_state;
