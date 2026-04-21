@@ -20,10 +20,12 @@ keyboard_set_map(ord("M"), ord("C"));
 keyboard_set_map(ord("L"), ord("Z"));
 keyboard_set_map(ord("K"), ord("X"));
 
+dir = 270;
 spd = 3;
 dodge_spd = 5;
 my_acel = 0.1;
 acel = 0.1;
+invencible = false;
 
 go_to_x = 0;
 go_to_y = 0;
@@ -36,8 +38,13 @@ sprites_run = [[spr_player_run_down, spr_player_run_up, spr_player_run_right, sp
 sprites_attack = [[spr_player_attack_down, spr_player_attack_up, spr_player_attack_right, spr_player_attack_right]];
 sprites_shield = [[spr_player_shield_down, spr_player_shield_up, spr_player_shield_right, spr_player_shield_right]];
 sprites_dodge = [[spr_player_dodge_down, spr_player_dodge_up, spr_player_dodge_right, spr_player_dodge_right]];
+sprites_hit = [[spr_player_hit_down, spr_player_hit_up, spr_player_hit_right, spr_player_hit_right]];
 
 initialize_states_with_animation();
+initialize_iframes();
+
+initialize_timer_system(1);
+set_timers_cd([[FPS / 2, FPS / 2]]);
 #endregion
 
 #region Functions
@@ -54,6 +61,7 @@ inputs = function() {
 	if((left xor right) or (up xor down)) {
 		switch(state) {
 			case dodge_state: break;
+			case damage_state: break;
 			
 			default: dir = point_direction(0, 0, right - left, down - up);
 		}
@@ -92,6 +100,16 @@ change_self_sprite = function(_array = sprites_idle) {
 	switch(face) {
 		case 2: image_xscale = 1; break;
 		case 3: image_xscale = -1; break;
+	}
+}
+
+take_damage = function(_damage) {
+	if(!invencible) {
+		global.player_life = clamp(global.player_life - _damage, 0, global.max_player_life);
+		set_iframes(timers_cd_list[0][0]);
+		reset_timer_index(0);
+		invencible = true;
+		change_state(damage_state, [spr_player_hit_down]);
 	}
 }
 #endregion
@@ -158,6 +176,7 @@ attack_state = function() {
 		_damage_y = y + lengthdir_y(bbox_bottom - bbox_top, _face * 90);
 		
 		my_damage = instance_create_depth(_damage_x, _damage_y - bbox_bottom + bbox_top, 0, obj_damage);
+		my_damage.owner = id;
 	}
 	
 	change_self_sprite(sprites_attack);
@@ -188,6 +207,16 @@ special_state = function() {
 	} else {
 		change_state(idle_state, [spr_player_idle_down]);
 	}
+}
+
+damage_state = function() {
+	change_sprite_with_animation();
+	change_self_sprite(sprites_hit);
+	
+	hspd = lengthdir_x(spd, dir);
+	vspd = lengthdir_y(spd, dir);
+	
+	if(animation_end()) change_state(idle_state, [spr_player_idle_down]);
 }
 
 shield_state = function() {

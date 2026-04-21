@@ -2,6 +2,7 @@ event_inherited();
 
 max_life = 2;
 actual_life = max_life;
+damage = 1;
 
 spd = 3;
 
@@ -46,4 +47,13 @@ take_damage = function(_damage = 1) {
 	
 	set_shader_draw(FPS / 5, c_white);
 	change_state(damage_state, [sprite_index]);
+}
+
+damage_player = function() {
+	var _player = instance_place(x, y, obj_player);
+	
+	if(_player) {
+		_player.take_damage(damage);
+		_player.dir = point_direction(x, y, _player.x, _player.y);
+	}
 }

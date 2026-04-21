@@ -4,6 +4,16 @@ global.inventory[# 0, 0] = global.weapons[| Weapons.Blood_Sword];
 
 display_set_gui_size(camera_get_view_width(view_camera[0]), camera_get_view_height(view_camera[0]));
 
+draw_player_life = function(_x, _y) {
+	var _w = sprite_get_width(spr_heart) / 1.75;
+	
+	for(var _i = 0; _i < global.max_player_life; _i += 2) {
+		var _img = ((global.player_life - _i) != 1) + 1;
+		
+		draw_sprite(spr_heart, _img, _x + _w * _i, _y);
+	}
+}
+
 draw_pause = function() {
 	var _width = display_get_gui_width(),
 	_height = display_get_gui_height();

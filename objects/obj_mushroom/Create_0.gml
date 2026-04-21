@@ -122,6 +122,8 @@ attack_player = function() {
 	hspd = lengthdir_x(spd * 3, dir);
 	vspd = lengthdir_y(spd * 3, dir);
 	
+	damage_player();
+	
 	if(point_distance(x, y, target_x, target_y) < spd * 3 or place_meeting(x + hspd, y + vspd, obj_ground)) {
 		change_state(idle_state, [spr_mushroom_jump_down]);
 	}
