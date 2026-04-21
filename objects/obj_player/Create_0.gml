@@ -103,12 +103,25 @@ change_self_sprite = function(_array = sprites_idle) {
 	}
 }
 
-take_damage = function(_damage) {
-	if(!invencible) {
+take_damage = function(_damage, _dir) {
+	var _shielded = (abs(angle_difference(dir, _dir)) >= 135) and state == shield_state;
+	
+	if(_shielded) {
+		hspd = lengthdir_x(spd, _dir);
+		vspd = lengthdir_y(spd, _dir);
+		
+		return;
+	}
+	
+	if(!invencible and state != dodge_state) {
 		global.player_life = clamp(global.player_life - _damage, 0, global.max_player_life);
+		
 		set_iframes(timers_cd_list[0][0]);
 		reset_timer_index(0);
+		
+		dir = _dir;
 		invencible = true;
+		
 		change_state(damage_state, [spr_player_hit_down]);
 	}
 }
@@ -220,10 +233,10 @@ damage_state = function() {
 }
 
 shield_state = function() {
-	if(change_sprite_with_animation()) {
-		hspd = 0;
-		vspd = 0;
-	}
+	change_sprite_with_animation();
+	
+	hspd = lerp(hspd, 0, 0.1);
+	vspd = lerp(vspd, 0, 0.1);
 	
 	change_face();
 	change_self_sprite(sprites_shield);

@@ -93,6 +93,11 @@ chase_player_state = function() {
 	} else {
 		change_state(idle_state, [spr_mushroom_jump_down]);
 	}
+	
+	if(check_player_distance(20)) {
+		hspd = 0;
+		vspd = 0;
+	}
 }
 
 attack_charge = function() {

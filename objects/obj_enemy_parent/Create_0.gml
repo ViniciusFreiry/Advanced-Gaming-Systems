@@ -53,7 +53,6 @@ damage_player = function() {
 	var _player = instance_place(x, y, obj_player);
 	
 	if(_player) {
-		_player.take_damage(damage);
-		_player.dir = point_direction(x, y, _player.x, _player.y);
+		_player.take_damage(damage, point_direction(x, y, _player.x, _player.y));
 	}
 }
