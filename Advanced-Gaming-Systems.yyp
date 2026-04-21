@@ -164,6 +164,7 @@
     {"id":{"name":"scr_transition","path":"scripts/scr_transition/scr_transition.yy",},},
     {"id":{"name":"scr_trial","path":"scripts/scr_trial/scr_trial.yy",},},
     {"id":{"name":"scr_utilities","path":"scripts/scr_utilities/scr_utilities.yy",},},
+    {"id":{"name":"sq_attack_1","path":"sequences/sq_attack_1/sq_attack_1.yy",},},
     {"id":{"name":"sq_square_transition_1","path":"sequences/sq_square_transition_1/sq_square_transition_1.yy",},},
     {"id":{"name":"sq_square_transition_2","path":"sequences/sq_square_transition_2/sq_square_transition_2.yy",},},
     {"id":{"name":"sh_shader_draw","path":"shaders/sh_shader_draw/sh_shader_draw.yy",},},

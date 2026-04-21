@@ -10,6 +10,7 @@ right = false;
 attack = false;
 shield = false;
 dodge = false;
+special = false;
 
 keyboard_set_map(ord("W"), vk_up);
 keyboard_set_map(ord("A"), vk_left);
@@ -48,6 +49,7 @@ inputs = function() {
 	attack = keyboard_check_pressed(ord("C")) and global.player_weapon;
 	shield = keyboard_check(ord("Z"));
 	dodge = keyboard_check_pressed(ord("X"));
+	special = keyboard_check_pressed(vk_shift);
 	
 	if((left xor right) or (up xor down)) {
 		switch(state) {
@@ -56,6 +58,8 @@ inputs = function() {
 			default: dir = point_direction(0, 0, right - left, down - up);
 		}
 	}
+	
+	if(special) state = special_state;
 }
 
 apply_spd = function() {
@@ -160,6 +164,28 @@ attack_state = function() {
 	
 	if(animation_end()) {
 		instance_destroy(my_damage);
+		change_state(idle_state, [spr_player_idle_down]);
+	}
+}
+
+special_state = function() {
+	static sq_special = false;
+	
+	if(global.player_weapon) {
+		if(sq_special == false) {
+			sq_special = global.player_weapon.special(id);
+			image_alpha = 0;
+			hspd = 0;
+			vspd = 0;
+		} else if(sq_special and layer_sequence_is_finished(sq_special)) {
+			layer_sequence_destroy(sq_special);
+			sq_special = false;
+			image_alpha = 1;
+			
+			if(layer_exists("Attack_Layer")) layer_destroy("Attack_Layer");
+			change_state(idle_state, [spr_player_idle_down]);
+		}
+	} else {
 		change_state(idle_state, [spr_player_idle_down]);
 	}
 }
